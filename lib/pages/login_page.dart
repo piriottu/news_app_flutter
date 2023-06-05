@@ -1,66 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_flutter/providers/login_service_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app_flutter/blocs/form_bloc.dart' as B;
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Hello!')),
-        body: Column(
+      appBar: AppBar(title: const Text('Hello!')),
+      body: BlocBuilder<B.FormBloc, B.FormState>(
+        builder: (context, state) => Column(
           children: [
-            _email(context),
-            _password(context),
-            _loginButton(context),
+            _email(context, state),
+            _password(context, state),
+            _loginButton(context, state),
           ],
-        ));
+        ),
+      ),
+    );
   }
 
-  Widget _email(BuildContext context) => StreamBuilder(
-      stream: LoginServiceProvider.of(context)!.loginService.getEmailStream,
-      builder: (context, snapshot) {
-        return Padding(
+  Widget _email(BuildContext context,B.FormState state) =>
+         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'inseriesci email',
                 labelText: 'Email',
-                errorText: snapshot.hasError ? snapshot.error.toString() : null,
+                errorText: !state.isValidEmail ?'E-mail non valida' : null,
               ),
               keyboardType: TextInputType.emailAddress,
-              onChanged: LoginServiceProvider.of(context)!
-                  .loginService
-                  .getChangeEmailSink,
+              onChanged: context.watch<B.FormBloc>().changeEmail,
             ));
-      });
 
-  Widget _password(BuildContext context) => StreamBuilder(
-      stream: LoginServiceProvider.of(context)!.loginService.getPasswordStream,
-      builder: (context, snapshot) {
-        return Padding(
+  Widget _password(BuildContext context,B.FormState state) =>  Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: TextField(
             decoration: InputDecoration(
                 hintText: 'inserisci password',
                 labelText: 'Password',
                 errorText:
-                    snapshot.hasError ? snapshot.error.toString() : null),
+                    !state.isValidPassword ? 'Password non esatta' : null),
             keyboardType: TextInputType.text,
-            onChanged: LoginServiceProvider.of(context)!
-                .loginService
-                .getChangePasswordSink,
+            onChanged: context.watch<B.FormBloc>().changePassword,
             obscureText: true,
           ),
         );
-      });
 
-  Widget _loginButton(BuildContext context) => StreamBuilder(
-      stream:
-          LoginServiceProvider.of(context)!.loginService.isEnableLoginBtnStream,
-      builder: (context, snapshot) {
-        return Padding(
+  Widget _loginButton(BuildContext context,B.FormState state) =>  Padding(
             padding: const EdgeInsets.all(8),
             child: ElevatedButton(
-                onPressed: snapshot.data == true ? () {} : null,
+                onPressed: state.isValidForm == true ? () {} : null,
                 child: const Text('Next')));
-      });
 }
