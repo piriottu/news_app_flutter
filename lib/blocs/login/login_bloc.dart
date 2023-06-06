@@ -24,7 +24,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print(
           'Stai facendo login con email:${event.email}\n Hai introdotto la psw:${event.password}');
       //mostro una progress
-      await Future.delayed(const Duration(seconds: 3), () {});
+      emit.call(PerformingLogin());
+
+      await Future.delayed(const Duration(seconds: 3), () {
+      });
+
       authenticationCubit.setAuthenticated();
       emit.call(PerformedLogin());
     }/* else if (event is PasswordChangedEvent) {
