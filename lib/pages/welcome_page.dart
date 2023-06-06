@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/pages/second_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -10,9 +11,18 @@ class WelcomePage extends StatelessWidget {
               Text('Welcome', style: Theme.of(context).textTheme.headlineSmall),
         ),
         body: Center(
-            child: Text(
-          'Wolcome!',
-          style: Theme.of(context).textTheme.headlineMedium,
-        )),
+            child: Column(children: [
+          Text(
+            'Wolcome!',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => const SecondPage(name: 'Nicola!')));
+            },
+            child: const Text('avanti'),
+          )
+        ])),
       );
 }
