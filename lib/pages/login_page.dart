@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_flutter/blocs/form_bloc.dart' as B;
+import 'package:news_app_flutter/blocs/form/form_bloc.dart' as B;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

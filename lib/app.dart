@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_flutter/blocs/form_bloc.dart';
+import 'package:news_app_flutter/blocs/form/form_bloc.dart';
 import 'package:news_app_flutter/pages/login_page.dart';
 
 class App extends StatelessWidget {
