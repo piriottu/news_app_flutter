@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_flutter/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:news_app_flutter/views/main_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HelloPage extends StatelessWidget {
   const HelloPage({super.key});
@@ -14,7 +15,7 @@ class HelloPage extends StatelessWidget {
             builder: (context, state) =>
                 Scaffold(
                   appBar: AppBar(
-                    title: Text('Welcome',
+                    title: Text(AppLocalizations.of(context)!.welcome_title,
                         style: Theme
                             .of(context)
                             .textTheme

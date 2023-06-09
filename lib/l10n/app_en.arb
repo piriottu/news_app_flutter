@@ -1,0 +1,14 @@
+{
+  "title_app": "My App",
+  "@title_app": {
+    "description": "my app title"
+  },
+  "welcome_title": "Welcome",
+  "@welcome_title": {
+    "description": "welcome description"
+  },
+  "welcome_description": "Hello!",
+  "@welcome_description": {
+    "description": "welcome description"
+  }
+}
